@@ -1,4 +1,3 @@
-using Interview.Web.Extension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -53,7 +52,6 @@ namespace Interview.Web
             {
                 endpoints.MapControllers();
             });
-            app.InitializeDb();
         }
     }
 }
