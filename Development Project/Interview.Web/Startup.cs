@@ -1,13 +1,12 @@
+using Interview.Web.Extension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Sparcpoint.Abstract;
+using Sparcpoint.Infrastructure;
+using Sparcpoint.Infrastructure.Services.Implementation;
 
 namespace Interview.Web
 {
@@ -24,6 +23,9 @@ namespace Interview.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<ProductContext>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IInventoryService, InventoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +53,7 @@ namespace Interview.Web
             {
                 endpoints.MapControllers();
             });
+            app.InitializeDb();
         }
     }
 }
